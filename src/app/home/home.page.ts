@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, Platform, ToastController } from '@ionic/angular';
 import { NotesService } from '../services/notes.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -8,8 +9,8 @@ import { NotesService } from '../services/notes.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit{
-
-  constructor(private notesService: NotesService, private alertCtrl: AlertController) {}
+  subscription: any;
+  constructor(private notesService: NotesService, private alertCtrl: AlertController, private toastCtrl: ToastController, private platform: Platform) {}
 
   ngOnInit() {
     this.notesService.load();
@@ -39,5 +40,25 @@ export class HomePage implements OnInit{
     }).then((alert) => {
       alert.present();
     });
+  }
+
+  ionViewDidEnter() {
+      let backpressedCount = 0;
+    this.subscription = this.platform.backButton.subscribe(() => {
+      if(backpressedCount+2000 > new Date().getTime()){
+          this.toastCtrl.dismiss();
+          navigator['app'].exitApp();
+      } else {
+        this.toastCtrl.create(
+          {
+            message: 'Press back again to exit',
+            duration: 2000,
+          }
+        ).then((toast) => 
+        toast.present() )
+      }
+      backpressedCount = new Date().getTime();
+    } 
+    );
   }
 }
