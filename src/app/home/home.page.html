@@ -1,8 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Notes
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onClick()">
+        <ion-icon slot="icon-only" name="clipboard"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -13,8 +18,9 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-list>
+    <ion-item button detail>
+      <ion-label>Title here</ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
