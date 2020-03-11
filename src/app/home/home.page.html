@@ -1,10 +1,10 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="secondary">
     <ion-title>
       Notes
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="onClick()">
+      <ion-button (click)="addNote()">
         <ion-icon slot="icon-only" name="clipboard"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -19,8 +19,8 @@
   </ion-header>
 
   <ion-list>
-    <ion-item button detail>
-      <ion-label>Title here</ion-label>
+    <ion-item button detail *ngFor="let note of notesService.notes" [routerLink]="'/notes/' + note.id" routerDirection="forward">
+      <ion-label>{{note.title}}</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>
