@@ -11,7 +11,7 @@ export class NotesService {
 
   constructor(private storage: Storage) { }
 
-  load(): Promise<boolean> {
+  public load(): Promise<boolean> {
     // Return a promise to let us know when this operation has completed
     return new Promise((resolve) => {
       // Get the notes that were saved into storage
@@ -28,17 +28,17 @@ export class NotesService {
     });
   }
 
-  save(): void {
+  public save(): void {
     // Save the current array of notes to storage
     this.storage.set('notes', this.notes);
   }
 
-  getNote(id): Note {
+  public getNote(id): Note {
     // Return the note that has an id matching the id passed in
     return this.notes.find(note => note.id === id);
   }
 
-  createNote(title): void {
+  public createNote(title): void {
     // Create a unique id that is one larger than the current largest id
     let id = Math.max(...this.notes.map(note => parseInt(note.id)), 0) + 1;
 
@@ -51,7 +51,7 @@ export class NotesService {
     this.save();
   }
 
-  deleteNote(note): void {
+  public deleteNote(note): void {
     // Get the index in the array of the note that was passed in
     let index = this.notes.indexOf(note);
     // Delete that element of the array and resve the data
