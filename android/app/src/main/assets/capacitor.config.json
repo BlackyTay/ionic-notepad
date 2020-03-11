@@ -1,0 +1,8 @@
+{
+  "appId": "io.ionic.notepad",
+  "appName": "ionic-notepad",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "cordova": {}
+}
